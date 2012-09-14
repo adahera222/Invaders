@@ -1,0 +1,18 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\GameManager.cs">
+    <Files>
+      <File FileName="Assets\scripts\PlayerScript.cs" Line="63" Column="3" />
+      <File FileName="Assets\scripts\PlayerBulletScript.cs" Line="34" Column="36" />
+      <File FileName="Assets\scripts\InvaderScript.cs" Line="46" Column="16" />
+      <File FileName="Assets\scripts\InvaderBulletScript.cs" Line="32" Column="4" />
+      <File FileName="Assets\scripts\FleetScript.cs" Line="57" Column="24" />
+      <File FileName="Assets\scripts\GameManager.cs" Line="67" Column="12" />
+      <File FileName="Assets\scripts\ParticleScript.cs" Line="8" Column="26" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
