@@ -6,17 +6,18 @@ public class Game : MonoBehaviour {
 	public GameObject Fleet;
 	public GameObject Player;
 	
-	
+	public int Lives = 3;
 	public float FleetSpeed = 100.0f;
-	public int Wave = 0;
+	public int Wave = 1;
 	
 	private bool playing = false;
 	private GameObject fleet;
+	private int lives;
 	
 	// Use this for initialization
 	void Start () 
 	{
-	
+		lives = Lives;
 	}
 	
 	// Update is called once per frame
@@ -26,8 +27,16 @@ public class Game : MonoBehaviour {
 		// Handle pause
 		if (Input.GetKeyDown(KeyCode.P))
 		{
-			playing = false;
-			GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Show();
+			if (playing == false)
+			{
+				playing = true;
+				GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Hide();
+			}
+			else
+			{
+				playing = false;
+				GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Show();
+			}
 		}
 		
 		// Check for pause
@@ -54,27 +63,56 @@ public class Game : MonoBehaviour {
 		// Hide the menu
 		GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Hide();
 		
+		// Spawn the player
+		SpawnPlayer();
+		
 		// Spawn the first wave
 		SpawnFleet();
 		
 		playing = true;
+		lives = Lives;
 	}
 	
 	public void QuitPressed()
 	{
-		print ("quit");
 		Application.Quit();
 	}
 	
-	private void SpawnFleet()
+	public void FleetKilled()
 	{
 		Wave++;
-		
+		SpawnFleet();
+	}
+	
+	public void PlayerKilled()
+	{
+		lives--;
+		if (lives < 0)
+		{
+				
+		}
+		else
+		{
+			SpawnPlayer();
+		}
+	}
+	
+	public void SpawnFleet()
+	{
 		// Destroy the current fleet object
 		Destroy(GameObject.FindGameObjectWithTag("fleet"));
 		
 		// Instantiate a new fleet way off screen
 		fleet = (GameObject)Instantiate(Fleet);
+	}
+	
+	public void SpawnPlayer()
+	{
+		// Destroy the current player
+		Destroy(GameObject.FindGameObjectWithTag("player"));
+	
+		// Create a new player
+		Instantiate(Player);
 	}
 	
 

@@ -4,6 +4,7 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
 	
 	public float BulletSpeed = 1200;
+	public float Damage = 25;
 	
 	// Use this for initialization
 	void Start () 
@@ -14,6 +15,7 @@ public class Bullet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		// Move the bullet
 		transform.Translate(0, (int)(BulletSpeed * Time.deltaTime), 0);
 		
 		// Destroy the bullet if it goes out of bounds
@@ -21,5 +23,23 @@ public class Bullet : MonoBehaviour {
 		{
 			Destroy(gameObject);
 		}
+	}
+	
+	void OnTriggerEnter(Collider other)
+	{
+		// Check who we collided with
+		if (other.GetComponent<Invader>())
+			other.GetComponent<Invader>().TakeDamage(Damage);
+		else if (other.GetComponent<Player>())
+			other.GetComponent<Player>().TakeDamage(Damage);
+		else
+		{
+			// Play 2 bullet collide animation
+			
+			// Play 2 bullets collide sound
+			
+		}
+		
+		Destroy(gameObject);
 	}
 }

@@ -7,11 +7,14 @@ public class Invader : MonoBehaviour {
 	
 	public float MaxTimeBetweenShots = 5;
 	public float MinTimeBetweenShots = 1;
+	public float MinTurrentAngle = -2;
+	public float MaxTurrentAngle = 2;
 	
 	private float timeUntilNextShot = 5;
 	private float timeSinceLastShot = 0;
 	
 	private Transform turret;
+	private float health = 100;
 	
 	// Use this for initialization
 	void Start () 
@@ -25,6 +28,10 @@ public class Invader : MonoBehaviour {
 		// Shoot
 		if (timeSinceLastShot >= timeUntilNextShot)
 		{
+			// Randomize the turrent angle
+			//turret.Rotate(0, 0, Random.Range(MinTurrentAngle, MaxTurrentAngle));
+			
+			// Fire a bullet
 			Instantiate(Bullet, turret.position, turret.rotation);
 			timeUntilNextShot = Random.Range(MinTimeBetweenShots, MaxTimeBetweenShots);
 			timeSinceLastShot = 0;		
@@ -34,4 +41,23 @@ public class Invader : MonoBehaviour {
 			timeSinceLastShot += Time.deltaTime;
 		}
 	}
+	
+	public void TakeDamage(float amount)
+	{
+		// Take damage
+		health -= amount;
+		if (health <= 0)
+		{
+			// Play death animation
+			
+			// Play death sound
+			
+			// Tell the Fleet that this invader has died
+			GameObject.FindGameObjectWithTag("fleet").GetComponent<Fleet>().InvaderKilled();
+			
+			// Destroy the player 
+			Destroy(gameObject);
+		}
+	}
+	
 }

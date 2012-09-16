@@ -28,4 +28,14 @@ public class Fleet : MonoBehaviour {
 		print ("fly in done");
 		Attacking = true;
 	}
+	
+	public void InvaderKilled()
+	{
+		InvaderCount--;
+		if (InvaderCount <= 0)
+		{
+			// Tell the game that the fleed was killed
+			GameObject.FindGameObjectWithTag("game").GetComponent<Game>().FleetKilled();
+		}
+	}
 }
