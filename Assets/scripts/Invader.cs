@@ -4,11 +4,14 @@ using System.Collections;
 public class Invader : MonoBehaviour {
 	
 	public GameObject Bullet;
+	public GameObject Explosion;
+	public GameObject Damage;
 	
 	public float MaxTimeBetweenShots = 5;
 	public float MinTimeBetweenShots = 1;
 	public float MinTurrentAngle = -2;
 	public float MaxTurrentAngle = 2;
+	public float InitialShotDelay = 2;
 	
 	private float timeUntilNextShot = 5;
 	private float timeSinceLastShot = 0;
@@ -20,6 +23,7 @@ public class Invader : MonoBehaviour {
 	void Start () 
 	{
 		turret = transform.GetChild(0);
+		timeUntilNextShot = Random.Range(MinTimeBetweenShots, MaxTimeBetweenShots) + InitialShotDelay;
 	}
 	
 	// Update is called once per frame
@@ -49,6 +53,7 @@ public class Invader : MonoBehaviour {
 		if (health <= 0)
 		{
 			// Play death animation
+			Instantiate(Explosion, transform.position, Quaternion.identity);
 			
 			// Play death sound
 			
@@ -57,6 +62,14 @@ public class Invader : MonoBehaviour {
 			
 			// Destroy the player 
 			Destroy(gameObject);
+		}
+		else
+		{
+			// Play damage animation
+			Instantiate(Damage, transform.position, Quaternion.identity);
+			
+			// Play damage sound
+			
 		}
 	}
 	

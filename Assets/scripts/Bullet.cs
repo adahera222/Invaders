@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 	
+	public GameObject BulletHitExplosion;
 	public float BulletSpeed = 1200;
 	public float Damage = 25;
 	
@@ -35,6 +36,7 @@ public class Bullet : MonoBehaviour {
 		else
 		{
 			// Play 2 bullet collide animation
+			Instantiate(BulletHitExplosion, transform.position, Quaternion.identity);
 			
 			// Play 2 bullets collide sound
 			

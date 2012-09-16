@@ -13,8 +13,17 @@ public class Fleet : MonoBehaviour {
 	void Start () 
 	{
 		// Spawn invaders
-		GameObject invader = (GameObject)Instantiate(InvaderZero, transform.position, Quaternion.identity);
-		invader.transform.parent = gameObject.transform;
+		for (int i=0;i<25;i++)
+		{
+			GameObject invader;
+			if (Random.Range(-10, 10) < 0)
+				invader = (GameObject)Instantiate(InvaderZero, transform.position + new Vector3(-400+i*30,0,0), Quaternion.identity);
+			else
+				invader = (GameObject)Instantiate(InvaderOne, transform.position + new Vector3(-400+i*30,0,0), Quaternion.identity);
+			
+			invader.transform.parent = gameObject.transform;
+			InvaderCount++;
+		}
 	}
 	
 	// Update is called once per frame

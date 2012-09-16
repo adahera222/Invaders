@@ -15,11 +15,19 @@ Loading C:\Users\markl\Documents\UnityProjects\Invaders\Invaders_dev1_Data\Manag
 Platform assembly: C:\Users\markl\Documents\UnityProjects\Invaders\Invaders_dev1_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\markl\Documents\UnityProjects\Invaders\Invaders_dev1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 - Completed reload, in  0.044 seconds
+fly in done
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+UnityEngine.MonoBehaviour:print(Object)
+Fleet:OnFlyInAnimationDone() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Fleet.cs:37)
+ 
+(Filename: C Line: 0)
+
 new game
 UnityEngine.Debug:Internal_Log(Int32, String, Object)
 UnityEngine.Debug:Log(Object)
 UnityEngine.MonoBehaviour:print(Object)
-Game:NewGamePressed() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Game.cs:61)
+Game:NewGamePressed() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Game.cs:64)
 UnityEngine.GameObject:SendMessage(String, Object, SendMessageOptions)
 UnityEngine.GameObject:SendMessage(String)
 <coHandleButtonPress>c__Iterator2:MoveNext() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\TK2DROOT\tk2d\Code\Gui\tk2dButton.cs:295)
@@ -30,33 +38,7 @@ fly in done
 UnityEngine.Debug:Internal_Log(Int32, String, Object)
 UnityEngine.Debug:Log(Object)
 UnityEngine.MonoBehaviour:print(Object)
-Fleet:OnFlyInAnimationDone() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Fleet.cs:28)
- 
-(Filename: C Line: 0)
-
-fly in done
-UnityEngine.Debug:Internal_Log(Int32, String, Object)
-UnityEngine.Debug:Log(Object)
-UnityEngine.MonoBehaviour:print(Object)
-Fleet:OnFlyInAnimationDone() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Fleet.cs:28)
- 
-(Filename: C Line: 0)
-
-player killed
-UnityEngine.Debug:Internal_Log(Int32, String, Object)
-UnityEngine.Debug:Log(Object)
-UnityEngine.MonoBehaviour:print(Object)
-Player:TakeDamage(Single) (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Player.cs:63)
-Bullet:OnTriggerEnter(Collider) (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Bullet.cs:34)
- 
-(Filename: C Line: 0)
-
-player killed
-UnityEngine.Debug:Internal_Log(Int32, String, Object)
-UnityEngine.Debug:Log(Object)
-UnityEngine.MonoBehaviour:print(Object)
-Player:TakeDamage(Single) (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Player.cs:63)
-Bullet:OnTriggerEnter(Collider) (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Bullet.cs:34)
+Fleet:OnFlyInAnimationDone() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Fleet.cs:37)
  
 (Filename: C Line: 0)
 

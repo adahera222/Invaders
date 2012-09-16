@@ -18,6 +18,7 @@ public class Game : MonoBehaviour {
 	void Start () 
 	{
 		lives = Lives;
+		SpawnFleet();
 	}
 	
 	// Update is called once per frame
@@ -31,24 +32,26 @@ public class Game : MonoBehaviour {
 			{
 				playing = true;
 				GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Hide();
+				//Screen.showCursor = false;
 			}
 			else
 			{
 				playing = false;
 				GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Show();
+				//Screen.showCursor = true;
 			}
 		}
 		
 		// Check for pause
-		if (!playing)
-			return;
+		//if (!playing)
+		//	return;
 		
 		// Move the fleet if it is attacking
 		if (fleet.GetComponent<Fleet>().Attacking)
 		{
-			if (fleet.transform.position.x >= 790)
+			if (fleet.transform.position.x >= 599)
 				FleetSpeed *= -1;
-			if (fleet.transform.position.x <= 10)
+			if (fleet.transform.position.x <= 199)
 				FleetSpeed *= -1;
 			
 			// We truncate to integer to make pixel art sprites render nicely
@@ -62,6 +65,14 @@ public class Game : MonoBehaviour {
 		
 		// Hide the menu
 		GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Hide();
+		
+		// lower volume
+		GameObject.FindGameObjectWithTag("music").GetComponent<Animation>().Play("AudioOut");
+		
+		//Screen.showCursor = false;
+		
+		// Delete the fleet 
+		Destroy(GameObject.FindGameObjectWithTag("fleet"));
 		
 		// Spawn the player
 		SpawnPlayer();

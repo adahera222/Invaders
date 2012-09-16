@@ -4,6 +4,8 @@ using System.Collections;
 public class Player : MonoBehaviour {
 	
 	public GameObject Bullet;
+	public GameObject Explosion;
+	public GameObject Damage;
 	
 	public float HorizontalSpeed = 600;
 	public float VerticalSpeed = 600;
@@ -52,16 +54,12 @@ public class Player : MonoBehaviour {
 		if (timeSinceSpawn < SpawnDownTime)
 			return;
 		
-		// Animate
-		
-		// Play sound
-		
 		// Take damage
 		health -= amount;
 		if (health <= 0)
 		{
-			print ("player killed");
 			// Play death animation
+			Instantiate(Explosion, transform.position + new Vector3(0, 25, 0), Quaternion.identity);
 			
 			// Play death sound
 			
@@ -70,6 +68,13 @@ public class Player : MonoBehaviour {
 			
 			// Destroy the player 
 			Destroy(gameObject);
+		}
+		else
+		{		
+			// Animate
+			Instantiate(Damage, transform.position + new Vector3(0, 25, 0), Quaternion.identity);
+		
+			// Play sound	
 		}
 	}
 }
