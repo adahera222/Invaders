@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour {
 	public float BulletSpeed = 1200;
 	public float Damage = 25;
 	
+	private bool paused = false;
+	
 	// Use this for initialization
 	void Start () 
 	{
@@ -16,6 +18,9 @@ public class Bullet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if (paused)
+			return;
+		
 		// Move the bullet
 		transform.Translate(0, (int)(BulletSpeed * Time.deltaTime), 0);
 		
@@ -43,5 +48,15 @@ public class Bullet : MonoBehaviour {
 		}
 		
 		Destroy(gameObject);
+	}
+	
+	public void OnPause()
+	{
+		paused = true;
+	}
+	
+	public void OnResume()
+	{
+		paused = false;
 	}
 }

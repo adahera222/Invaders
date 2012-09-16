@@ -7,6 +7,10 @@ public class Player : MonoBehaviour {
 	public GameObject Explosion;
 	public GameObject Damage;
 	
+	public AudioClip ShootSound;
+	public AudioClip DamageSound;
+	public AudioClip ExplodeSound;
+	
 	public float HorizontalSpeed = 600;
 	public float VerticalSpeed = 600;
 	public float HorizontalMin = 10;
@@ -18,6 +22,7 @@ public class Player : MonoBehaviour {
 	private Transform turret;
 	private float health;
 	private float timeSinceSpawn = 0;
+	private bool paused = false;
 	
 	// Use this for initialization
 	void Start () 
@@ -29,6 +34,9 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if (paused)
+			return;
+		
 		// Invincible and can't move for 2 sec after spawn
 		timeSinceSpawn += Time.deltaTime;
 		if (timeSinceSpawn < SpawnDownTime)
@@ -45,6 +53,8 @@ public class Player : MonoBehaviour {
 		// Shoot
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
+			gameObject.GetComponent<AudioSource>().clip = ShootSound;
+			gameObject.GetComponent<AudioSource>().Play();
 			Instantiate(Bullet, turret.position, turret.rotation);	
 		}
 	}
@@ -62,6 +72,8 @@ public class Player : MonoBehaviour {
 			Instantiate(Explosion, transform.position + new Vector3(0, 25, 0), Quaternion.identity);
 			
 			// Play death sound
+			gameObject.GetComponent<AudioSource>().clip = ExplodeSound;
+			gameObject.GetComponent<AudioSource>().Play();
 			
 			// Tell the Game that the player has died
 			GameObject.FindGameObjectWithTag("game").GetComponent<Game>().PlayerKilled();
@@ -75,6 +87,18 @@ public class Player : MonoBehaviour {
 			Instantiate(Damage, transform.position + new Vector3(0, 25, 0), Quaternion.identity);
 		
 			// Play sound	
+			gameObject.GetComponent<AudioSource>().clip = DamageSound;
+			gameObject.GetComponent<AudioSource>().Play();
 		}
+	}
+	
+	public void OnPause()
+	{
+		paused = true;
+	}
+	
+	public void OnResume()
+	{
+		paused = false;
 	}
 }

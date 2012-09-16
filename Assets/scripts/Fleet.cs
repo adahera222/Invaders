@@ -9,6 +9,8 @@ public class Fleet : MonoBehaviour {
 	public int InvaderCount = 0;
 	public bool Attacking = false;
 	
+	private bool paused = false;
+	
 	// Use this for initialization
 	void Start () 
 	{
@@ -29,7 +31,8 @@ public class Fleet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		if (paused)
+			return;
 	}
 	
 	void OnFlyInAnimationDone()
@@ -46,5 +49,15 @@ public class Fleet : MonoBehaviour {
 			// Tell the game that the fleed was killed
 			GameObject.FindGameObjectWithTag("game").GetComponent<Game>().FleetKilled();
 		}
+	}
+	
+		public void OnPause()
+	{
+		paused = true;
+	}
+	
+	public void OnResume()
+	{
+		paused = false;
 	}
 }

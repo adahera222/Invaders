@@ -13,10 +13,16 @@ public class Game : MonoBehaviour {
 	private bool playing = false;
 	private GameObject fleet;
 	private int lives;
+	private bool paused = false;
 	
 	// Use this for initialization
 	void Start () 
 	{
+		if (Random.Range(-10,10) < 0)
+			GameObject.FindGameObjectWithTag("music").GetComponent<MusicPlayer>().Play(1);
+		else
+			GameObject.FindGameObjectWithTag("music").GetComponent<MusicPlayer>().Play(2);
+		
 		lives = Lives;
 		SpawnFleet();
 	}
@@ -28,23 +34,20 @@ public class Game : MonoBehaviour {
 		// Handle pause
 		if (Input.GetKeyDown(KeyCode.P))
 		{
-			if (playing == false)
+			if (paused)
 			{
-				playing = true;
-				GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Hide();
-				//Screen.showCursor = false;
+				GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Hide();	
+				ResumeGame();	
 			}
 			else
 			{
-				playing = false;
+				PauseGame();
 				GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Show();
-				//Screen.showCursor = true;
 			}
 		}
 		
-		// Check for pause
-		//if (!playing)
-		//	return;
+		if (paused)
+			return;
 		
 		// Move the fleet if it is attacking
 		if (fleet.GetComponent<Fleet>().Attacking)
@@ -61,7 +64,10 @@ public class Game : MonoBehaviour {
 	
 	public void NewGamePressed()
 	{
-		print ("new game");	
+		if (paused)
+		{
+			ResumeGame();
+		}
 		
 		// Hide the menu
 		GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Hide();
@@ -126,5 +132,22 @@ public class Game : MonoBehaviour {
 		Instantiate(Player);
 	}
 	
+	public void PauseGame()
+	{
+		paused = true;
+		Object[] objects = FindObjectsOfType (typeof(GameObject));
+		foreach (GameObject go in objects) {
+			go.SendMessage ("OnPause", SendMessageOptions.DontRequireReceiver);
+		}	
+	}
+	
+	public void ResumeGame()
+	{
+		paused = false;
+		Object[] objects = FindObjectsOfType (typeof(GameObject));
+		foreach (GameObject go in objects) {
+			go.SendMessage ("OnResume", SendMessageOptions.DontRequireReceiver);
+		}			
+	}
 
 }

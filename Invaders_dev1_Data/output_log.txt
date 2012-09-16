@@ -14,23 +14,12 @@ Platform assembly: C:\Users\markl\Documents\UnityProjects\Invaders\Invaders_dev1
 Loading C:\Users\markl\Documents\UnityProjects\Invaders\Invaders_dev1_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\markl\Documents\UnityProjects\Invaders\Invaders_dev1_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\markl\Documents\UnityProjects\Invaders\Invaders_dev1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.044 seconds
+- Completed reload, in  0.045 seconds
 fly in done
 UnityEngine.Debug:Internal_Log(Int32, String, Object)
 UnityEngine.Debug:Log(Object)
 UnityEngine.MonoBehaviour:print(Object)
-Fleet:OnFlyInAnimationDone() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Fleet.cs:37)
- 
-(Filename: C Line: 0)
-
-new game
-UnityEngine.Debug:Internal_Log(Int32, String, Object)
-UnityEngine.Debug:Log(Object)
-UnityEngine.MonoBehaviour:print(Object)
-Game:NewGamePressed() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Game.cs:64)
-UnityEngine.GameObject:SendMessage(String, Object, SendMessageOptions)
-UnityEngine.GameObject:SendMessage(String)
-<coHandleButtonPress>c__Iterator2:MoveNext() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\TK2DROOT\tk2d\Code\Gui\tk2dButton.cs:295)
+Fleet:OnFlyInAnimationDone() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Fleet.cs:40)
  
 (Filename: C Line: 0)
 
@@ -38,7 +27,23 @@ fly in done
 UnityEngine.Debug:Internal_Log(Int32, String, Object)
 UnityEngine.Debug:Log(Object)
 UnityEngine.MonoBehaviour:print(Object)
-Fleet:OnFlyInAnimationDone() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Fleet.cs:37)
+Fleet:OnFlyInAnimationDone() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Fleet.cs:40)
+ 
+(Filename: C Line: 0)
+
+fly in done
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+UnityEngine.MonoBehaviour:print(Object)
+Fleet:OnFlyInAnimationDone() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Fleet.cs:40)
+ 
+(Filename: C Line: 0)
+
+fly in done
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+UnityEngine.MonoBehaviour:print(Object)
+Fleet:OnFlyInAnimationDone() (at C:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\Fleet.cs:40)
  
 (Filename: C Line: 0)
 

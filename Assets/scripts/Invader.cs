@@ -19,6 +19,8 @@ public class Invader : MonoBehaviour {
 	private Transform turret;
 	private float health = 100;
 	
+	private bool paused = false;
+	
 	// Use this for initialization
 	void Start () 
 	{
@@ -29,6 +31,9 @@ public class Invader : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if (paused)
+			return;
+		
 		// Shoot
 		if (timeSinceLastShot >= timeUntilNextShot)
 		{
@@ -71,6 +76,16 @@ public class Invader : MonoBehaviour {
 			// Play damage sound
 			
 		}
+	}
+	
+	public void OnPause()
+	{
+		paused = true;
+	}
+	
+	public void OnResume()
+	{
+		paused = false;
 	}
 	
 }
