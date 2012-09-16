@@ -1,14 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Game.cs">
     <Files>
-      <File FileName="Assets\scripts\PlayerScript.cs" Line="63" Column="3" />
-      <File FileName="Assets\scripts\PlayerBulletScript.cs" Line="34" Column="36" />
-      <File FileName="Assets\scripts\InvaderScript.cs" Line="46" Column="16" />
-      <File FileName="Assets\scripts\InvaderBulletScript.cs" Line="32" Column="4" />
-      <File FileName="Assets\scripts\FleetScript.cs" Line="57" Column="24" />
-      <File FileName="Assets\scripts\GameManager.cs" Line="67" Column="12" />
-      <File FileName="Assets\scripts\ParticleScript.cs" Line="8" Column="26" />
+      <File FileName="Assets\TK2DROOT\tk2d\Code\Gui\tk2dButton.cs" Line="218" Column="55" />
+      <File FileName="Assets\scripts\Invader.cs" Line="5" Column="2" />
+      <File FileName="Assets\scripts\Game.cs" Line="35" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
