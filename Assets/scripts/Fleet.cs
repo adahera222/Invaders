@@ -37,7 +37,6 @@ public class Fleet : MonoBehaviour {
 	
 	void OnFlyInAnimationDone()
 	{
-		print ("fly in done");
 		Attacking = true;
 	}
 	

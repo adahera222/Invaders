@@ -7,10 +7,6 @@ public class Player : MonoBehaviour {
 	public GameObject Explosion;
 	public GameObject Damage;
 	
-	public AudioClip ShootSound;
-	public AudioClip DamageSound;
-	public AudioClip ExplodeSound;
-	
 	public float HorizontalSpeed = 600;
 	public float VerticalSpeed = 600;
 	public float HorizontalMin = 10;
@@ -53,8 +49,7 @@ public class Player : MonoBehaviour {
 		// Shoot
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			gameObject.GetComponent<AudioSource>().clip = ShootSound;
-			gameObject.GetComponent<AudioSource>().Play();
+			GameObject.FindGameObjectWithTag("playershoot").GetComponent<AudioSource>().Play();
 			Instantiate(Bullet, turret.position, turret.rotation);	
 		}
 	}
@@ -72,8 +67,7 @@ public class Player : MonoBehaviour {
 			Instantiate(Explosion, transform.position + new Vector3(0, 25, 0), Quaternion.identity);
 			
 			// Play death sound
-			gameObject.GetComponent<AudioSource>().clip = ExplodeSound;
-			gameObject.GetComponent<AudioSource>().Play();
+			GameObject.FindGameObjectWithTag("playerexplosion").GetComponent<AudioSource>().Play();
 			
 			// Tell the Game that the player has died
 			GameObject.FindGameObjectWithTag("game").GetComponent<Game>().PlayerKilled();
@@ -87,8 +81,7 @@ public class Player : MonoBehaviour {
 			Instantiate(Damage, transform.position + new Vector3(0, 25, 0), Quaternion.identity);
 		
 			// Play sound	
-			gameObject.GetComponent<AudioSource>().clip = DamageSound;
-			gameObject.GetComponent<AudioSource>().Play();
+			GameObject.FindGameObjectWithTag("playerdamage").GetComponent<AudioSource>().Play();
 		}
 	}
 	

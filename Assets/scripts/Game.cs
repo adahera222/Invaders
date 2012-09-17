@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Game : MonoBehaviour {
 	
+	public GameObject Title;
 	public GameObject Fleet;
 	public GameObject Player;
 	
@@ -10,7 +11,6 @@ public class Game : MonoBehaviour {
 	public float FleetSpeed = 100.0f;
 	public int Wave = 1;
 	
-	private bool playing = false;
 	private GameObject fleet;
 	private int lives;
 	private bool paused = false;
@@ -18,13 +18,13 @@ public class Game : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		if (Random.Range(-10,10) < 0)
-			GameObject.FindGameObjectWithTag("music").GetComponent<MusicPlayer>().Play(1);
-		else
-			GameObject.FindGameObjectWithTag("music").GetComponent<MusicPlayer>().Play(2);
+		// Start playing music
+		GameObject.FindGameObjectWithTag("music").GetComponent<MusicPlayer>().Play(1);
 		
 		lives = Lives;
-		SpawnFleet();
+		StartCoroutine(SpawnFleet());
+		
+		Instantiate(Title);
 	}
 	
 	// Update is called once per frame
@@ -49,6 +49,9 @@ public class Game : MonoBehaviour {
 		if (paused)
 			return;
 		
+		if (fleet == null)
+			return;
+		
 		// Move the fleet if it is attacking
 		if (fleet.GetComponent<Fleet>().Attacking)
 		{
@@ -69,6 +72,9 @@ public class Game : MonoBehaviour {
 			ResumeGame();
 		}
 		
+		// Hide the title
+		GameObject.FindGameObjectWithTag("title").GetComponent<Title>().Hide();
+		
 		// Hide the menu
 		GameObject.FindGameObjectWithTag("menu").GetComponent<Menu>().Hide();
 		
@@ -81,12 +87,11 @@ public class Game : MonoBehaviour {
 		Destroy(GameObject.FindGameObjectWithTag("fleet"));
 		
 		// Spawn the player
-		SpawnPlayer();
+		StartCoroutine(SpawnPlayer());
 		
 		// Spawn the first wave
-		SpawnFleet();
-		
-		playing = true;
+		StartCoroutine(SpawnFleet());
+
 		lives = Lives;
 	}
 	
@@ -98,7 +103,7 @@ public class Game : MonoBehaviour {
 	public void FleetKilled()
 	{
 		Wave++;
-		SpawnFleet();
+		StartCoroutine(SpawnFleet());
 	}
 	
 	public void PlayerKilled()
@@ -109,25 +114,43 @@ public class Game : MonoBehaviour {
 				
 		}
 		else
-		{
-			SpawnPlayer();
+		{		
+			StartCoroutine(SpawnPlayer());
 		}
 	}
 	
-	public void SpawnFleet()
+	/// <summary>
+	/// Spawns the fleet. This is a coroutine which will delay for 2 seconds before spawning.
+	/// </summary>
+	/// <returns>
+	/// The fleet.
+	/// </returns>
+	public IEnumerator SpawnFleet()
 	{
 		// Destroy the current fleet object
 		Destroy(GameObject.FindGameObjectWithTag("fleet"));
+		
+		// Yield for 2 seconds
+		yield return new WaitForSeconds(2);
 		
 		// Instantiate a new fleet way off screen
 		fleet = (GameObject)Instantiate(Fleet);
 	}
 	
-	public void SpawnPlayer()
+	/// <summary>
+	/// Spawns the player. This is a coroutine which will delay for 2 seconds before spawning.
+	/// </summary>
+	/// <returns>
+	/// The player.
+	/// </returns>
+	public IEnumerator SpawnPlayer()
 	{
 		// Destroy the current player
 		Destroy(GameObject.FindGameObjectWithTag("player"));
 	
+		// Yield for 2 seconds
+		yield return new WaitForSeconds(2);
+		
 		// Create a new player
 		Instantiate(Player);
 	}
