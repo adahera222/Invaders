@@ -21,6 +21,10 @@ public class tk2dButton : MonoBehaviour
 	// Button Pressed = after it is pressed and activated
 	
 	/// <summary>
+	/// The button over sprite. This is resolved by name from the sprite collection of the sprite component.
+	/// </summary>
+	public string buttonOverSprite = "null";
+	/// <summary>
 	/// The button down sprite. This is resolved by name from the sprite collection of the sprite component.
 	/// </summary>
 	public string buttonDownSprite = "button_down";
@@ -318,6 +322,18 @@ public class tk2dButton : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		/*// ML Additions for MouseOver handling
+		Ray r = viewCamera.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (collider.Raycast(r, out hit, 1.0e8f))
+		{
+			print ("over");
+			if (buttonOverSpriteId != -1)
+			{
+				sprite.spriteId = buttonOverSpriteId;
+			}
+		}*/
+		
 		if (!buttonDown && Input.GetMouseButtonDown(0))
         {
             Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
@@ -329,4 +345,5 @@ public class tk2dButton : MonoBehaviour
             }
         }
 	}
+
 }
