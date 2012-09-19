@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerBullet : MonoBehaviour {
+public class PlayerBullet : MonoBehaviour 
+{
 	
 	public float Speed = 1200;
 	public float MaxY = 800;
@@ -13,6 +14,9 @@ public class PlayerBullet : MonoBehaviour {
 	/// </summary>
 	void Update () 
 	{
+		if (GetComponent<qtkPausable>().Paused)
+			return;
+		
 		// Move the bullet
 		transform.Translate(0, (int)(Speed * Time.deltaTime), 0);
 		

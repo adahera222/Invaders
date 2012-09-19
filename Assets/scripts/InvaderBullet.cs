@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class InvaderBullet : MonoBehaviour {
+public class InvaderBullet : MonoBehaviour 
+{
 
 	public float Speed = 200;
 	public float MaxY = 800;
@@ -13,6 +14,9 @@ public class InvaderBullet : MonoBehaviour {
 	/// </summary>
 	void Update () 
 	{
+		if (GetComponent<qtkPausable>().Paused)
+			return;
+		
 		// Move the bullet
 		transform.Translate(0, (int)(-Speed * Time.deltaTime), 0);
 		

@@ -4,7 +4,8 @@ using System.Collections;
 /// <summary>
 /// Attach this script to any game object in order to destroy it based on some settings.
 /// </summary>
-public class qtkDestroyer : MonoBehaviour {
+public class qtkDestroyer : MonoBehaviour 
+{
 	
 	/// <summary>
 	/// Destroys the game object after this delay.

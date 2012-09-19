@@ -27,7 +27,8 @@ using System.Collections.Generic;
 /// }
 /// 
 /// </summary>
-public class qtkEventDispatcher : MonoBehaviour {
+public class qtkEventDispatcher : MonoBehaviour 
+{
 	
 	/// <summary>
 	/// A dictionary of message names and their owners.
@@ -61,7 +62,7 @@ public class qtkEventDispatcher : MonoBehaviour {
 	/// </summary>
 	void OnDestroy()
 	{
-		instance = null;
+		//instance = null;
 	}
 	
 	/// <summary>
@@ -75,22 +76,19 @@ public class qtkEventDispatcher : MonoBehaviour {
 	/// </param>
 	public void Dispatch(string message, GameObject sender)
 	{
+
 		if (handlers.ContainsKey(message))
 		{
-			for (int i = 0; i < handlers[message].Count; i++)
+			foreach(GameObject go in handlers[message])
 			{
-				if (handlers[message][i] == null)
+				if (go != null)
 				{
-					// Remove any subscribers that are now null
-					handlers[message].RemoveAt(i);
-				}
-				else
-				{
-					// Send the message
-					handlers[message][i].SendMessage(message, sender);	
+					//print ("qtkEventDispatcher: dispatched " + message + " to " + go.name);
+					go.SendMessage(message, sender, SendMessageOptions.DontRequireReceiver);	
 				}
 			}
 		}
+
 	}
 	
 	/// <summary>
@@ -104,11 +102,13 @@ public class qtkEventDispatcher : MonoBehaviour {
 	/// </param>
 	public void Subscribe(string message, GameObject subscriber)
 	{
+
 		if (!handlers.ContainsKey(message))
 		{
 			handlers.Add(message, new List<GameObject>());	
 		}
 		handlers[message].Insert(0, subscriber);
+
 	}
 	
 	/// <summary>
@@ -122,14 +122,13 @@ public class qtkEventDispatcher : MonoBehaviour {
 	/// </param>
 	public void Unsubscribe(string message, GameObject subscriber)
 	{
+
 		if (handlers.ContainsKey(message))
 		{
 			handlers[message].Remove(subscriber);
-			if (handlers[message].Count <= 0)
-			{
-				handlers.Remove(message);	
-			}
+			//print (subscriber + " unsubscribed from " + message);
 		}
+
 	}
 
 }

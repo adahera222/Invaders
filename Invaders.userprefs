@@ -1,6 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\qtk\scripts\qtkEventDispatcher.cs">
+    <Files>
+      <File FileName="Assets\qtk\scripts\qtkButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\qtk\scripts\qtkEventDispatcher.cs" Line="57" Column="57" />
+      <File FileName="Assets\qtk\scripts\qtkPausable.cs" Line="30" Column="3" />
+      <File FileName="Assets\qtk\scripts\qtkDestroyer.cs" Line="8" Column="1" />
+      <File FileName="c:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\GameController.cs" Line="37" Column="42" />
+      <File FileName="c:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\FleetController.cs" Line="40" Column="84" />
+      <File FileName="c:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\HudController.cs" Line="6" Column="1" />
+      <File FileName="c:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\PlayerController.cs" Line="5" Column="46" />
+      <File FileName="Assets\scripts\PlayerBullet.cs" Line="4" Column="42" />
+      <File FileName="c:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\InvaderController.cs" Line="5" Column="47" />
+      <File FileName="c:\Users\markl\Documents\UnityProjects\Invaders\Assets\scripts\InvaderBullet.cs" Line="19" Column="3" />
+      <File FileName="Assets\scripts\Menu.cs" Line="5" Column="1" />
+      <File FileName="Assets\scripts\tester.cs" Line="24" Column="34" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

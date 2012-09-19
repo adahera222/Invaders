@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class InvaderController : MonoBehaviour {
+public class InvaderController : MonoBehaviour 
+{
 	
 	public string SpriteZeroName = "zero";
 	public string SpriteOneName = "one";
@@ -33,6 +34,12 @@ public class InvaderController : MonoBehaviour {
 			GetComponent<tk2dSprite>().spriteId = spriteIdOne;
 		
 		Health = 100.0f;
+	}
+	
+	void Update()
+	{
+		if (GetComponent<qtkPausable>().Paused)
+			return;
 	}
 	
 	/// <summary>

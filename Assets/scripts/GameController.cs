@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour 
+{
 
 	public GameObject Player;
 	public GameObject Fleet;
@@ -12,6 +13,9 @@ public class GameController : MonoBehaviour {
 	
 	private int playerLives;
 	
+	public GameObject LoadTester;
+	public bool LoadTest = false;
+	public int LoadTestObjectCount = 100;
 	
 	/// <summary>
 	/// Called before the first Update().
@@ -27,6 +31,15 @@ public class GameController : MonoBehaviour {
 		qtkEventDispatcher.GetInstance().Subscribe("OnResume", this.gameObject);
 		qtkEventDispatcher.GetInstance().Subscribe("OnPlayerKilled", this.gameObject);
 		qtkEventDispatcher.GetInstance().Subscribe("OnFleetKilled", this.gameObject);
+		
+		// Load test!!
+		if (LoadTest){
+			for (int i = 0;i < LoadTestObjectCount;i++)
+			{
+				Instantiate(LoadTester);
+			}
+		}
+		
 	}
 	
 	/// <summary>

@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class HudController : MonoBehaviour {
+public class HudController : MonoBehaviour 
+{
 	
 	/// <summary>
 	/// Called before the first Update().

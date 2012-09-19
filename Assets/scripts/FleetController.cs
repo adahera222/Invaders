@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class FleetController : MonoBehaviour {
+public class FleetController : MonoBehaviour 
+{
 
 	public float Speed;
 	public GameObject Invader;
@@ -18,7 +19,7 @@ public class FleetController : MonoBehaviour {
 		GameObject go = (GameObject)Instantiate(Invader, transform.position + new Vector3(0,0,0), Quaternion.identity);
 		go.transform.parent = transform;
 		
-		// Subscribe to invader killed event
+		// Subscribe to events
 		qtkEventDispatcher.GetInstance().Subscribe("OnInvaderKilled", this.gameObject);
 	}
 	
@@ -27,7 +28,16 @@ public class FleetController : MonoBehaviour {
 	/// </summary>
 	void Update ()
 	{
+		if (GetComponent<qtkPausable>().Paused)
+			return;
+		
 		// Move the fleet
+	}
+	
+	void OnDestroy()
+	{
+		// Unsubscribe from events
+		qtkEventDispatcher.GetInstance().Unsubscribe("OnInvaderKilled", this.gameObject);	
 	}
 	
 	/// <summary>

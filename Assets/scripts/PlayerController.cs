@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour 
+{
 	
 	public float Health;
 	public float Speed;
@@ -33,6 +34,9 @@ public class PlayerController : MonoBehaviour {
 	/// </summary>
 	void Update ()
 	{
+		if (GetComponent<qtkPausable>().Paused)
+			return;
+		
 		// Movement
 		float transH = Input.GetAxis("Horizontal") * HorizontalSpeed * Time.deltaTime;
 		float transV = Input.GetAxis("Vertical") * VerticalSpeed * Time.deltaTime;
