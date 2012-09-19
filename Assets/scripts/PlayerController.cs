@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
-
+	
 	public float Health;
 	public float Speed;
 	public float HorizontalSpeed = 600;
@@ -20,11 +20,17 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip KilledSound;
 	public AudioClip ShootSound;
 	
+	/// <summary>
+	/// Called before the first Update().
+	/// </summary>
 	void Start ()
 	{
 		Health = 100.0f;
 	}
 	
+	/// <summary>
+	/// Called once per frame.
+	/// </summary>
 	void Update ()
 	{
 		// Movement
@@ -36,13 +42,14 @@ public class PlayerController : MonoBehaviour {
 		// Shooting
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			OnShoot();
+			Shoot();
 		}
 	}
 	
-	#region Events
-	
-	public void OnShoot()
+	/// <summary>
+	/// Fire the weapon.
+	/// </summary>
+	public void Shoot()
 	{
 		// Play sound
 		AudioSource.PlayClipAtPoint(ShootSound, transform.position);
@@ -51,13 +58,19 @@ public class PlayerController : MonoBehaviour {
 		Instantiate(Bullet, transform.position + new Vector3(0, BulletOffsetY, 0), Quaternion.identity);
 	}
 	
-	public void OnHit(float amount)
+	/// <summary>
+	/// Called when the player is hit.
+	/// </summary>
+	/// <param name='amount'>
+	/// Amount.
+	/// </param>
+	public void Hit(float amount)
 	{
 		// Take damage
 		Health -= amount;
 		
 		// Broadcast event
-		mleEventDispatcher.GetInstance().Dispatch("OnPlayerHit", this.gameObject);
+		qtkEventDispatcher.GetInstance().Dispatch("OnPlayerHit", this.gameObject);
 		
 		// Play animation
 		Instantiate(HitParticles, transform.position + new Vector3(0, 20, 0), Quaternion.identity);
@@ -68,14 +81,17 @@ public class PlayerController : MonoBehaviour {
 		// Check if killed
 		if (Health <= 0)
 		{
-			OnKilled();
+			Killed();
 		}		
 	}
 	
-	public void OnKilled()
+	/// <summary>
+	/// Called when the player is killed.
+	/// </summary>
+	public void Killed()
 	{
 		// Broadcast event
-		mleEventDispatcher.GetInstance().Dispatch("OnPlayerKilled", this.gameObject);
+		qtkEventDispatcher.GetInstance().Dispatch("OnPlayerKilled", this.gameObject);
 		
 		// Play animation
 		Instantiate(KilledParticles, transform.position + new Vector3(0, 15, 0), Quaternion.identity);
@@ -86,13 +102,5 @@ public class PlayerController : MonoBehaviour {
 		// Destroy this game object
 		Destroy(this.gameObject);
 	}
-	
-	#endregion
-	
-	#region Event Handlers
-	
-	
-	
-	#endregion
 
 }

@@ -7,21 +7,30 @@ public class GameController : MonoBehaviour {
 	public GameObject Player;
 	public GameObject Fleet;
 	
+	public float MusicVolumeInMenu = .5f;
+	public float MusicVolumeInGame = .15f;
+	
 	private int playerLives;
 	
 	
 	/// <summary>
-	/// Start this instance.
+	/// Called before the first Update().
 	/// </summary>
 	void Start ()
 	{
-		mleEventDispatcher.GetInstance().Subscribe("OnNewGame", this.gameObject);
-		mleEventDispatcher.GetInstance().Subscribe("OnQuit", this.gameObject);
-		mleEventDispatcher.GetInstance().Subscribe("OnResume", this.gameObject);
+		// Set the music volume
+		GetComponent<AudioSource>().volume = MusicVolumeInMenu;
+		
+		// Register with events
+		qtkEventDispatcher.GetInstance().Subscribe("OnNewGame", this.gameObject);
+		qtkEventDispatcher.GetInstance().Subscribe("OnQuit", this.gameObject);
+		qtkEventDispatcher.GetInstance().Subscribe("OnResume", this.gameObject);
+		qtkEventDispatcher.GetInstance().Subscribe("OnPlayerKilled", this.gameObject);
+		qtkEventDispatcher.GetInstance().Subscribe("OnFleetKilled", this.gameObject);
 	}
 	
 	/// <summary>
-	/// Update this instance.
+	/// Called once per frame.
 	/// </summary>
 	void Update ()
 	{
@@ -34,7 +43,8 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	void Pause()
 	{
-		mleEventDispatcher.GetInstance().Dispatch("OnPause", this.gameObject);
+		GetComponent<AudioSource>().volume = MusicVolumeInMenu;
+		qtkEventDispatcher.GetInstance().Dispatch("OnPause", this.gameObject);
 	}
 	
 	/// <summary>
@@ -46,7 +56,7 @@ public class GameController : MonoBehaviour {
 	}
 	
 	/// <summary>
-	/// Spawns the player.
+	/// Spawn the player.
 	/// </summary>
 	void SpawnPlayer()
 	{
@@ -54,11 +64,10 @@ public class GameController : MonoBehaviour {
 		if (p) Destroy(p);
 		
 		Instantiate(Player);
-		mleEventDispatcher.GetInstance().Subscribe("OnPlayerKilled", this.gameObject);
 	}
 	
 	/// <summary>
-	/// Spawns the fleet.
+	/// Spawn the fleet.
 	/// </summary>
 	void SpawnFleet()
 	{
@@ -66,31 +75,31 @@ public class GameController : MonoBehaviour {
 		if (f) Destroy(f);
 		
 		Instantiate(Fleet);
-		mleEventDispatcher.GetInstance().Subscribe("OnFleetKilled", this.gameObject);
 	}
 	
 	#region Event Handlers
 	
 	/// <summary>
-	/// Event handler for resuming the game from pause. Fired by menu.
+	/// Event handler for resuming the game from pause.
 	/// </summary>
 	/// <param name='sender'>
 	/// Sender.
 	/// </param>
 	public void OnResume(GameObject sender)
 	{
+		GetComponent<AudioSource>().volume = MusicVolumeInGame;
 		print ("resume");
 	}
 	
 	/// <summary>
-	/// Event handler for a new game. This is most likely fired by a menu.
+	/// Event handler for a new game.
 	/// </summary>
 	/// <param name='sender'>
 	/// Sender.
 	/// </param>
 	public void OnNewGame(GameObject sender)
 	{
-		gameObject.GetComponent<AudioSource>().Stop();
+		GetComponent<AudioSource>().volume = MusicVolumeInGame;
 		
 		playerLives = 3;
 		
@@ -102,7 +111,7 @@ public class GameController : MonoBehaviour {
 	}
 	
 	/// <summary>
-	/// Event handler for quitting the game. THis is most likely fired by a menu.
+	/// Event handler for quitting the game.
 	/// </summary>
 	/// <param name='sender'>
 	/// Sender.
@@ -113,7 +122,7 @@ public class GameController : MonoBehaviour {
 	}
 	
 	/// <summary>
-	/// Event handler for the player being killed. Fired by the player.
+	/// Event handler for the player being killed.
 	/// </summary>
 	/// <param name='sender'>
 	/// Sender.
@@ -127,14 +136,13 @@ public class GameController : MonoBehaviour {
 	}
 	
 	/// <summary>
-	/// Event handler for the fleet being killed, fired by the fleet.
+	/// Event handler for the fleet being killed.
 	/// </summary>
 	/// <param name='sender'>
 	/// Sender.
 	/// </param>
 	public void OnFleetKilled(GameObject sender)
 	{
-		mleEventDispatcher.GetInstance().Unsubscribe("OnFleetKilled", this.gameObject);
 		SpawnFleet();
 	}
 	

@@ -2,7 +2,32 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class mleEventDispatcher : MonoBehaviour {
+/// <summary>
+/// Quick and easy event dispatching. This script can be attached to an Empty GameObject
+/// and added to the scene to provide a simple to use, fast means of sending messages 
+/// from one GameObject to another.
+/// 
+/// Example:
+/// GameObject scoreKeeper needs to know when GameObject enemy is killed so it can increase the score:
+/// 
+/// in scoreKeeper.cs
+/// ...
+/// qtkEventDispatcher.GetInstance().Subscribe("OnEnemyKilled", this.gameObject);
+/// ...
+/// void OnEnemyKilled(GameObject sender)
+/// {
+///		print ("enemy killed");
+/// }
+/// 
+/// in enemy.cs
+/// ...
+/// void OnKilled()
+/// {
+/// 	qtkEventDispatcher.GetInstance().Dispatch("OnEnemyKilled", this.gameObject);
+/// }
+/// 
+/// </summary>
+public class qtkEventDispatcher : MonoBehaviour {
 	
 	/// <summary>
 	/// A dictionary of message names and their owners.
@@ -12,28 +37,22 @@ public class mleEventDispatcher : MonoBehaviour {
 	/// <summary>
 	/// Keep track of a single instance of this object.
 	/// </summary>
-	private static mleEventDispatcher instance = null;
-	public static mleEventDispatcher GetInstance()
+	private static qtkEventDispatcher instance = null;
+	public static qtkEventDispatcher GetInstance()
 	{
 		if (instance == null)
 		{
-			instance = (mleEventDispatcher)FindObjectOfType(typeof(mleEventDispatcher));	
+			instance = (qtkEventDispatcher)FindObjectOfType(typeof(qtkEventDispatcher));	
 		}
 		return instance;
 	}
 	
 	/// <summary>
-	/// Runs when awake.
+	/// Runs when the object is being loaded.
 	/// </summary>
 	void Awake()
 	{
-		if (instance != null)
-		{
-			
-		}
-		
 		instance = this;
-		
 		handlers = new Dictionary<string, List<GameObject>>();
 	}
 	

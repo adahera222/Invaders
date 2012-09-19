@@ -9,46 +9,52 @@ public class FleetController : MonoBehaviour {
 	
 	private int invaderCount;
 	
+	/// <summary>
+	/// Called before the first Update().
+	/// </summary>
 	void Start ()
 	{
 		// spawn invader
 		GameObject go = (GameObject)Instantiate(Invader, transform.position + new Vector3(0,0,0), Quaternion.identity);
 		go.transform.parent = transform;
 		
-		// register with killed event
-		mleEventDispatcher.GetInstance().Subscribe("OnInvaderKilled", this.gameObject);
+		// Subscribe to invader killed event
+		qtkEventDispatcher.GetInstance().Subscribe("OnInvaderKilled", this.gameObject);
 	}
 	
+	/// <summary>
+	/// Called once per frame.
+	/// </summary>
 	void Update ()
 	{
-
+		// Move the fleet
 	}
 	
-	void OnDestroy()
-	{
-		//EventDispatcher.GetInstance().Unsubscribe("OnInvaderKilled", this.gameObject);	
-	}
-	
-	#region Events
-	
-	public void OnKilled()
+	/// <summary>
+	/// Called when the fleet is killed.
+	/// </summary>
+	public void Killed()
 	{
 		// Broadcast event
-		mleEventDispatcher.GetInstance().Dispatch("OnFleetKilled", this.gameObject);
+		qtkEventDispatcher.GetInstance().Dispatch("OnFleetKilled", this.gameObject);
 		
 		// Destroy this game object
 		Destroy(this.gameObject);
 	}
 	
-	#endregion
-	
 	#region Event Handlers
 	
+	/// <summary>
+	/// Called when the "OnInvaderKilled" event is dispatched.
+	/// </summary>
+	/// <param name='sender'>
+	/// Sender.
+	/// </param>
 	public void OnInvaderKilled(GameObject sender)
 	{
 		if (--invaderCount <= 0)
 		{
-			OnKilled();
+			Killed();
 		}
 	}
 	

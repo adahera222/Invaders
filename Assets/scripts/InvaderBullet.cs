@@ -8,20 +8,30 @@ public class InvaderBullet : MonoBehaviour {
 	public float MinY = -10;
 	public float Damage = 26;
 	
-	// Update is called once per frame
+	/// <summary>
+	/// Called once per frame.
+	/// </summary>
 	void Update () 
 	{
+		// Move the bullet
 		transform.Translate(0, (int)(-Speed * Time.deltaTime), 0);
 		
+		// Destroy it if out of bounds
 		if (transform.position.y > MaxY || transform.position.y < MinY)
 			Destroy(this.gameObject);
 	}
 	
+	/// <summary>
+	/// Called when this Collider collides with another.
+	/// </summary>
+	/// <param name='other'>
+	/// Other.
+	/// </param>
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.GetComponent<PlayerController>())
 		{
-			other.gameObject.GetComponent<PlayerController>().OnHit(Damage);	
+			other.gameObject.GetComponent<PlayerController>().Hit(Damage);	
 			Destroy(this.gameObject);
 		}
 	}

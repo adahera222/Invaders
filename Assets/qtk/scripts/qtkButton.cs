@@ -1,27 +1,43 @@
 using UnityEngine;
 using System.Collections;
 
-public class mleButton : MonoBehaviour {
+/// <summary>
+/// Represents a button that dispatches an event when pressed.
+/// </summary>
+public class qtkButton : MonoBehaviour {
 	
 	/// <summary>
-	/// The name of the button. This is also the name of the event that the EventDispatcher will fire.
-	/// If the button name is "NewGame", the Event will be "OnNewGame".
+	/// The name of the qtkEvent that will get dispatched when the button is pressed.
 	/// </summary>
-	public string ButtonName = "NewGame";
+	public string EventName = "OnNewGame";
 	
+	/// <summary>
+	/// The name of the tk2Dsprite to use for the button idle state.
+	/// </summary>
 	public string ButtonSprite = "newgame";
+	
+	/// <summary>
+	/// The name of the tk2Dsprite to use for the button over state.
+	/// </summary>
 	public string ButtonOverSprite = "newgame_dn";
 	
+	// Sprite Id's
 	private int btnSpriteId = -1;
 	private int btnOverSpriteId = -1;
 	
+	// The base tk2dSprite
 	private tk2dBaseSprite sprite;
+	
+	// The camera rendering this button
 	private Camera myCamera;
 	
+	// Keep track of button states
 	private bool over = false;
 	private bool pressed = false;
 	
-	// Use this for initialization
+	/// <summary>
+	/// Called before the first Update().
+	/// </summary>
 	void Start () 
 	{
 		// Get the sprite component
@@ -51,7 +67,9 @@ public class mleButton : MonoBehaviour {
 		sprite.spriteId = btnSpriteId;
 	}
 	
-	// Update is called once per frame
+	/// <summary>
+	/// Called once per frame.
+	/// </summary>
 	void Update () 
 	{
 		// Hover
@@ -84,7 +102,7 @@ public class mleButton : MonoBehaviour {
 		{
 			pressed = false;
 			
-			mleEventDispatcher.GetInstance().Dispatch("On"+ButtonName, this.gameObject);
+			qtkEventDispatcher.GetInstance().Dispatch(EventName, this.gameObject);
 		}
 	}
 	

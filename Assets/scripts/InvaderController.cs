@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class InvaderController : MonoBehaviour {
-
+	
+	public string SpriteZeroName = "zero";
+	public string SpriteOneName = "one";
 	public float Health;
 	public GameObject Bullet;
 	public GameObject HitParticles;
@@ -12,22 +14,31 @@ public class InvaderController : MonoBehaviour {
 	public AudioClip KilledSound;
 	public AudioClip ShootSound;
 	
-	public int SpriteIDOne = 5;
-	public int SpriteIDZero = 6;
+	private int spriteIdZero = -1;
+	private int spriteIdOne = -1;
 	
+	/// <summary>
+	/// Called before the first Update().
+	/// </summary>
 	void Start ()
 	{
+		// Get the sprite Id's
+		spriteIdZero = GetComponent<tk2dSprite>().GetSpriteIdByName(SpriteZeroName);
+		spriteIdOne = GetComponent<tk2dSprite>().GetSpriteIdByName(SpriteOneName);
+		
+		// Randomize the sprite
 		if (Random.Range(-10,10) < 0)
-			GetComponent<tk2dSprite>().spriteId = SpriteIDOne;
+			GetComponent<tk2dSprite>().spriteId = spriteIdZero;
 		else
-			GetComponent<tk2dSprite>().spriteId = SpriteIDZero;
+			GetComponent<tk2dSprite>().spriteId = spriteIdOne;
 		
 		Health = 100.0f;
 	}
-
-	#region Events
 	
-	public void OnShoot()
+	/// <summary>
+	/// Fire the weapon.
+	/// </summary>
+	public void Shoot()
 	{
 		// Play sound
 		AudioSource.PlayClipAtPoint(ShootSound, transform.position);
@@ -36,7 +47,13 @@ public class InvaderController : MonoBehaviour {
 		Instantiate(Bullet, transform.position + new Vector3(0, -35, 0), Quaternion.identity);
 	}
 	
-	public void OnHit(float amount)
+	/// <summary>
+	/// Called when the invader is hit.
+	/// </summary>
+	/// <param name='amount'>
+	/// Amount.
+	/// </param>
+	public void Hit(float amount)
 	{
 		// Take damage
 		Health -= amount;
@@ -50,14 +67,17 @@ public class InvaderController : MonoBehaviour {
 		// Check if killed
 		if (Health <= 0)
 		{
-			OnKilled();
+			Killed();
 		}		
 	}
 	
-	public void OnKilled()
+	/// <summary>
+	/// Called when the invader is killed.
+	/// </summary>
+	public void Killed()
 	{
 		// Broadcast event
-		mleEventDispatcher.GetInstance().Dispatch("OnInvaderKilled", this.gameObject);
+		qtkEventDispatcher.GetInstance().Dispatch("OnInvaderKilled", this.gameObject);
 		
 		// Play animation
 		Instantiate(KilledParticles, transform.position, Quaternion.identity);
@@ -68,13 +88,5 @@ public class InvaderController : MonoBehaviour {
 		// Destroy this game object
 		Destroy(this.gameObject);
 	}
-	
-	#endregion
-	
-	#region Event Handlers
-	
-	
-	
-	#endregion
 
 }
